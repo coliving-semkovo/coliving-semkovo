@@ -24,3 +24,35 @@ Literally all you need is either:
 All you need to do is click on the green `<> Code` dropdown button on the 
 [GitHub repo page](https://github.com/tobyurff/coliving-semkovo),
 and then choose: `Create codespace on main`.
+
+
+## Playwright (browser tests)
+
+### Running the Playwright tests in VS Code
+
+The Codespace comes with Playwright's VS Code extension already installed and configured.
+To run the tests via the extension see the [Getting Started guide](https://playwright.dev/docs/getting-started-vscode)
+and [the extension's documentation](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright).
+
+### Running the Playwright tests from the command line
+
+- `npx playwright test`
+
+or via our wrapper script:
+
+- `npm run e2e`
+
+### Running the Playwright tests in UI mode (in a Codespace)
+
+Playwright's [UI mode is very powerful indeed](https://playwright.dev/docs/test-ui-mode), so it is important
+that we can use this mode when working in a GitHub Codespace.  Fortunately, it is very easy to do so:
+
+- `npx playwright test --ui-host=0.0.0.0`
+
+or via our wrapper script:
+
+- `npm run e2e:ui:codespace`
+
+As per [the documentation](https://playwright.dev/docs/test-ui-mode#docker--github-codespaces) the port gets
+forwarded automatically, so it is then just a case of clicking on the link that is shown in the terminal 
+window that begins with http://0.0.0.0 - easy!
