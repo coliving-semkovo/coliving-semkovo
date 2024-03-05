@@ -9,8 +9,8 @@
 		"preview": "next build && next start",
 		"lint": "next lint",
 		"lint:fix": "next lint --fix",
-		"format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
-		"format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
+		"format:check": "npx biome format ./",
+		"format:write": "npx biome format --write ./",
 		"typecheck": "tsc --noEmit",
 		"test": "jest",
 		"test:watch": "jest --watchAll",
@@ -24,7 +24,7 @@
 		"hooks": {}
 	},
 	"lint-staged": {
-		"*.{jsx,js,ts,tsx}": ["eslint --cache --fix", "prettier --write"]
+		"*.{jsx,js,ts,tsx}": ["eslint --cache --fix"]
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.4",
