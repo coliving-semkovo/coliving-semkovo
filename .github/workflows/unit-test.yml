@@ -1,0 +1,14 @@
+name: Unit tests
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Tests
+        run: npm run test
