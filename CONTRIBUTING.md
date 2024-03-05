@@ -56,3 +56,31 @@ or via our wrapper script:
 As per [the documentation](https://playwright.dev/docs/test-ui-mode#docker--github-codespaces) the port gets
 forwarded automatically, so it is then just a case of clicking on the link that is shown in the terminal 
 window that begins with http://0.0.0.0 - easy!
+
+
+## Linting and formatting
+
+We use [Biome](https://biomejs.dev/) as a unified tool for both linting and formatting. It's a 
+next-generation [opinionated](https://biomejs.dev/formatter/option-philosophy/) formatter and linter.
+It is extremely fast and by using one tool for both formatting and linting we avoid the
+[conflicts](https://dev.to/studio_m_song/how-to-make-eslint-work-with-prettier-avoiding-conflicts-and-problems-57pi)
+that can often arise when using Prettier and ESLint.
+
+The Codespace comes with [Biome's VS Code extension](https://biomejs.dev/reference/vscode/)
+already installed and configured.  It is setup to
+[format on save](https://biomejs.dev/reference/vscode/#format-on-save).
+
+We also have a Biome CI check (a 
+[Biome GitHub Action](https://biomejs.dev/recipes/continuous-integration/#github-actions)) that runs on all pushes and pull requests, to ensure that we are always fully compliant with Biome.
+
+As we are using Biome, we do not use Prettier.
+
+We have kept ESLint in place, because:
+
+- Vercel invokes `next lint` which 
+  [has a hard dependency on ESLint](https://github.com/vercel/next.js/discussions/59347#discussion-5933112).
+- Biome and ESLint are largely compatible
+
+(If we find that incompatibilities between Biome and ESLint do start appearing regularly enough to be annoying, we can
+remove the ESLint rules and make it no-op - 
+[we can't remove ESLint completely as Vercel/Next.js expect it to be there, currently](https://github.com/vercel/next.js/discussions/59347#discussion-5933112).)
