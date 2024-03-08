@@ -13,7 +13,7 @@ const Home = () => {
 				explanation="A component similar to what other accommodation and booking sites use that allows the visitor to select their arrival and departure date and click through to search for available apartments."
 				imageUrl="/wireframe/availability-search-form.png"
 				links={{
-					route: "/search/2024-12-01/2025-01-01/", // TODO: Need to implement this skeleton route
+					route: "/search/2024-12-01/2025-01-01/",
 					text: "Let's see what happens if a visitor searches for an apartment in December 2024.",
 				}}
 			/>
