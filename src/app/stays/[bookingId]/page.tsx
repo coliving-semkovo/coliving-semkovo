@@ -1,4 +1,4 @@
-import WireframeSection from "@/components/wireframe/WireframeSection";
+import WireframeSection from "@/components/wireframe/wireframe-section";
 
 const StayOverviewPage = () => {
 	return (
