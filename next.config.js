@@ -8,6 +8,15 @@ const nextConfig = {
 			},
 		],
 	},
+	async redirects() {
+		return [
+			{
+				source: "/search",
+				destination: "/",
+				permanent: true,
+			},
+		];
+	},
 };
 
 module.exports = nextConfig;

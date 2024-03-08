@@ -6,7 +6,7 @@ describe("Homepage", () => {
 	it("renders the Components", () => {
 		render(<Home />);
 
-		const heading = screen.getByText("Coliving Semkovo", {
+		const heading = screen.getByText("Homepage hero", {
 			selector: "h1",
 		});
 
