@@ -12,8 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Biome
+        # By not specifying a version here we automatically use the version in package.json instead
+        # (see https://github.com/marketplace/actions/setup-biome#automatic-version-detection)
         uses: biomejs/setup-biome@v2
-        with:
-          version: latest
       - name: Run Biome
         run: biome ci .
