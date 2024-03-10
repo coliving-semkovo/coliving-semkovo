@@ -4,7 +4,7 @@ const Home = () => {
 	return (
 		<main>
 			<WireframeSection
-				title="Homepage hero"
+				title="Homepage hero – tiny change"
 				explanation="Some top-level introduction explaining what we're about: a one-of-a-kind coliving community, with plenty of space for focused work and relaxation in the stunning nature of the Bulgarian mountains. This page and content will continue to be managed through Webflow."
 				imageUrl="/wireframe/homepage-hero.png"
 			/>
