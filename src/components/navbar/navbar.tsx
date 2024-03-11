@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { SignInButton } from "@/components/navbar/sign-in-button";
 import { UserDropdown } from "@/components/navbar/user-dropdown";
 
-export const Navbar = async () => {
-	const session = await getServerSession(authOptions);
+export const Navbar = () => {
+	// Assuming a fixed state for demonstration
+	const isAuthenticated = false; // Example authentication state, adjust based on actual logic later
 
 	return (
 		<header className="w-full border-b">
@@ -15,7 +14,7 @@ export const Navbar = async () => {
 					Coliving Semkovo
 				</Link>
 				<div className="flex items-center gap-2">
-					{session ? <UserDropdown session={session} /> : <SignInButton />}
+					{isAuthenticated ? <UserDropdown /> : <SignInButton />}
 				</div>
 			</div>
 		</header>

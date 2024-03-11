@@ -1,9 +1,13 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
 export const SignInButton = () => {
-	return <Button onClick={() => signIn("github")}>Sign in</Button>;
+	return (
+		<Link href="/login" passHref>
+			<Button>Sign in</Button>
+		</Link>
+	);
 };
