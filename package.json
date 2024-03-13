@@ -24,7 +24,9 @@
 		"hooks": {}
 	},
 	"lint-staged": {
-		"*.{jsx,js,ts,tsx}": ["eslint --cache --fix"]
+		"*.{jsx,js,ts,tsx}": [
+			"eslint --cache --fix"
+		]
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.4",
@@ -39,7 +41,6 @@
 		"clsx": "^2.1.0",
 		"lucide-react": "^0.312.0",
 		"next": "14.1.0",
-		"next-auth": "^4.24.5",
 		"next-themes": "^0.2.1",
 		"react": "^18",
 		"react-dom": "^18",

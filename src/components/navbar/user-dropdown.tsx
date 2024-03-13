@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
 
 import { Icons } from "@/components/icons";
 import {
@@ -12,21 +10,28 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const UserDropdown = ({ session }: { session: Session }) => {
+export const UserDropdown = () => {
+	// Example static data for demonstration
+	const user = {
+		image: "https://placebeard.it/500x500", // Placeholder user image path
+		name: "Jane Doe",
+	};
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger>
 				<Image
 					className="overflow-hidden rounded-full"
-					src={`${session.user?.image}`}
-					alt={`${session.user?.name}`}
+					src={user.image}
+					alt={user.name}
 					width={32}
 					height={32}
 				/>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => signOut()}>
-					<Icons.logOut className="mr-2 size-4" /> <span>Log out</span>
+				<DropdownMenuItem onClick={() => console.log("Sign out logic here")}>
+					<Icons.logOut className="mr-2 size-4" />
+					<span>Log out</span>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
