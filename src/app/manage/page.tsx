@@ -1,32 +1,58 @@
 import WireframeSection from "@/components/wireframe/wireframe-section";
+
 const HubPage = () => {
 	return (
 		<main>
 			<WireframeSection
-				title="Hub"
-				explanation="This section allows logged-in users to manage some basic profile info like their name, photo and social media links that we might surface to other community members over time. If they've logged in using social media (e.g. Google or Facebook accounts, we can pre-populate that information)."
-			/>
-			<WireframeSection
-				title="Manage Profile"
-				explanation="This is a form for you to edit your name, upload or change a profile photo and add social media links or a short description we can use."
-			/>
-			<WireframeSection
-				title="Manage Apartments"
-				explanation="This section shows a list of the apartments you own (if you're a owner). You can click through to manage the details, see the revenue and bookings for each apartment as well as adapt pricing for your apartment."
-				links={[
+				title="Your Hub"
+				explanation="This is where you can manage and organize everything you need to. You need to be logged in to do that."
+				subsections={[
 					{
-						route: "/manage/apartments/A777",
-						text: "Click through to manage your imaginary apartment A777.",
+						title: "Manage Stays",
+						explanation:
+							"For anyone community member staying with us, this is where they can see and manage their stays.",
+						subsections: [
+							{
+								explanation:
+									"Your current stays go first. This is where you can arrange things like transport, check-in and payments.",
+							},
+							{
+								explanation: "Future stays that haven't started go second.",
+								links: [
+									{
+										route: "/manage/stays/7018463038476/",
+										text: "Follow this link to see the kinds of things you might want to manage for your stay.",
+									},
+								],
+							},
+							{
+								explanation:
+									"And your past stays are shown last, allowing you to go back and, for example, retrieve an invoice.",
+							},
+						],
 					},
-				]}
-			/>
-			<WireframeSection
-				title="Manage Stays"
-				explanation="This section allows logged in users to manage the stays they have booked, including current, future, and past stays."
-				links={[
 					{
-						route: "/manage/stays/45894357934",
-						text: "Click to manage your upcoming booking",
+						title: "Manage Apartments",
+						explanation:
+							"If you're an owner, this is where you see the apartments you own and manage.",
+
+						subsections: [
+							{
+								title: "A777",
+								links: [
+									{
+										route: "/manage/apartments/A777",
+										text: "This allows you to move to the part of the page where you can manage everything related to your apartment A777.",
+									},
+								],
+							},
+						],
+					},
+					{
+						title: "Profile Information",
+						imageUrl: "/wireframe/profile.png",
+						explanation:
+							"You can edit your name, a photo of yourself and social media links you're willing to share with other community members here.",
 					},
 				]}
 			/>

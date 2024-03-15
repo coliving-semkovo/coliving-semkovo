@@ -9,27 +9,27 @@ const StayOverviewPage = () => {
 				// TODO: Remove illustrative example urls for things we don't want to offer yet.
 				links={[
 					{
-						route: "/manage/stays/83094882939543/checkin",
+						route: "/manage/stays/7018463038476/checkin",
 						text: "Check in: Complete personal details, verify identity, etc.",
 					},
 					{
-						route: "/manage/stays/83094882939543/change-dates",
+						route: "/manage/stays/7018463038476/change-dates",
 						text: "Change your stay dates.",
 					},
 					{
-						route: "/manage/stays/83094882939543/payments",
+						route: "/manage/stays/7018463038476/payments",
 						text: "View current payments and bill.",
 					},
 					{
-						route: "/manage/stays/83094882939543/transport",
+						route: "/manage/stays/7018463038476/transport",
 						text: "Arrange transport to and from Semkovo.",
 					},
 					{
-						route: "/manage/stays/83094882939543/apartment-access",
+						route: "/manage/stays/7018463038476/apartment-access",
 						text: "Get access instructions for communal areas and apartment.",
 					},
 					{
-						route: "/manage/stays/83094882939543/cancel",
+						route: "/manage/stays/7018463038476/cancel",
 						text: "Cancel your stay.",
 					},
 				]}
