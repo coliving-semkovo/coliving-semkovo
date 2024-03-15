@@ -48,12 +48,6 @@ const HubPage = () => {
 							},
 						],
 					},
-					{
-						title: "Profile Information",
-						imageUrl: "/wireframe/profile.png",
-						explanation:
-							"You can edit your name, a photo of yourself and social media links you're willing to share with other community members here.",
-					},
 				]}
 			/>
 		</main>
