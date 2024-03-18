@@ -26,6 +26,25 @@ All you need to do is click on the green `<> Code` dropdown button on the
 and then choose: `Create codespace on main`.
 
 
+### Running the app locally
+
+The app is a [Next.js](https://nextjs.org/) website, built using
+[TypeScript](https://nextjs.org/docs/pages/building-your-application/configuring/typescript).
+
+The Codespace automatically starts the app's dev server on http://localhost:3000.
+
+The dev server has [Fast Refresh](https://nextjs.org/docs/architecture/fast-refresh) enabled, meaning that when you
+make changes to files, Next.js automatically applies the changes in the browser instantly, with no refresh needed.
+
+[The dev server is started as a background process, using `nohup`](https://code.visualstudio.com/remote/advancedcontainers/start-processes#:~:text=In%20other%20cases%2C%20you%20may%20want%20to%20start%20up%20a%20process%20and%20leave%20it%20running.%20This%20can%20be%20accomplished%20by%20using%20nohup%20and%20putting%20the%20process%20into%20the%20background%20using%20%26.%20For%20example%3A). The dev server logs are output to the `nohup.out` file in the root directory.  As the dev servrer runs as a background process, it will stay running even if you close the terminal window.
+
+To kill the dev server, you need to manually kill it by e.g. first searching for the process ID: `pgrep npm`,
+and then killing the process: `kill -9 {REPLACE_THIS_WITH_PROCESS_ID}`.
+
+If you do kill the dev server and then want to start it again, you can run it from your terminal window as per [the standard way](https://nextjs.org/docs/getting-started/installation#run-the-development-server) (`npm run dev`).
+
+
+
 ## Playwright (browser tests)
 
 ### Running the Playwright tests in VS Code
