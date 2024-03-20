@@ -6,7 +6,8 @@
             "extensions": [
                 "GitHub.vscode-github-actions",
                 "ms-playwright.playwright",
-                "biomejs.biome"
+                "biomejs.biome",
+                "ckolkman.vscode-postgres"
             ],
             "settings": {
                 // https://biomejs.dev/reference/vscode/#default-formatter
