@@ -1,5 +1,5 @@
 {
-	"name": "next-starter",
+	"name": "coliving-semkovo",
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
@@ -24,9 +24,7 @@
 		"hooks": {}
 	},
 	"lint-staged": {
-		"*.{jsx,js,ts,tsx}": [
-			"eslint --cache --fix"
-		]
+		"*.{jsx,js,ts,tsx}": ["eslint --cache --fix"]
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.4",
