@@ -1,5 +1,8 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/typescript-node:20-bookworm",
+    "name": "Node.js, TypeScript & PostgreSQL",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "postCreateCommand": "npm install && npx playwright install-deps && npx playwright install",
     "customizations": {
         "vscode": {
