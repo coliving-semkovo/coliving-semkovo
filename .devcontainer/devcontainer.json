@@ -10,7 +10,8 @@
                 "GitHub.vscode-github-actions",
                 "ms-playwright.playwright",
                 "biomejs.biome",
-                "ckolkman.vscode-postgres"
+                "ckolkman.vscode-postgres",
+                "Prisma.prisma"
             ],
             "settings": {
                 // https://biomejs.dev/reference/vscode/#default-formatter
