@@ -3,7 +3,7 @@
     "dockerComposeFile": "docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-    "postCreateCommand": "npm install && npx playwright install-deps && npx playwright install",
+    "postCreateCommand": "npm install && npx prisma migrate reset -f && npx playwright install-deps && npx playwright install",
     "customizations": {
         "vscode": {
             "extensions": [
