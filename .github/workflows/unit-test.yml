@@ -11,4 +11,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Tests
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npm run test
