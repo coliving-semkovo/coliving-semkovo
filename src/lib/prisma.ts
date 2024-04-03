@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 
 /* eslint-disable no-var */
 declare global {
-	// biome-ignore lint/style/noVar: This rule is also disabled for ESLint. Will investigate later
 	var prisma: PrismaClient | undefined;
 }
 /* eslint-enable no-var */

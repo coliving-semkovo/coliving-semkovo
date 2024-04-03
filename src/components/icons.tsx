@@ -1,4 +1,4 @@
-import { LogOut, LucideProps, Moon, Sun } from "lucide-react";
+import { LogOut, type LucideProps, Moon, Sun } from "lucide-react";
 
 export const Icons = {
 	sun: Sun,
