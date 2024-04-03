@@ -8,7 +8,9 @@ if (typeof window !== "undefined") {
 }
 
 const Config = z.object({
-	DATABASE_URL: z.string(),
+	DATABASE_URL: z.string().regex(/^(postgres|postgresql):\/\//, {
+		message: "DATABASE_URL is not a valid postgres connection string",
+	}),
 });
 
 const config = Config.parse(process.env);
