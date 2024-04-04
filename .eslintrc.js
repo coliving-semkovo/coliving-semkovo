@@ -21,7 +21,7 @@ module.exports = {
 				groups: [
 					["^.+\\.s?css$"],
 					[
-						`^(${require("module").builtinModules.join("|")})(/|$)`,
+						`^(${require("node:module").builtinModules.join("|")})(/|$)`,
 						"^react",
 						"^@?\\w",
 					],
