@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { isProduction } from "./environment";
 
 const prismaClientSingleton = () => {
 	return new PrismaClient();
@@ -14,4 +15,10 @@ const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
 
 export default prisma;
 
-if (process.env.NODE_ENV !== "production") globalThis.prismaGlobal = prisma;
+/* The example in the Prisma docs uses `globalThis` whenever `NODE_ENV` is not "production",
+   but that is too restrictive for us, as for instance the Vercel preview environments
+   would be deemed production. We need Prisma on the `globalThis` object for all environments
+   (including Vercel preview environments), so we can inject a new Prisma client with a
+   unique DB schema when running Playwright tests.
+ */
+if (!isProduction()) globalThis.prismaGlobal = prisma;
