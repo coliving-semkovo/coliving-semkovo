@@ -2,7 +2,9 @@ import { PrismaClient } from "@prisma/client";
 import { isProduction } from "./environment";
 
 const prismaClientSingleton = () => {
-	return new PrismaClient();
+	return new PrismaClient({
+		datasourceUrl: process.env.DATABASE_URL,
+	});
 };
 
 /* eslint-disable no-var */
