@@ -11,6 +11,9 @@ import { siteConfig } from "@/lib/constant";
 import { fonts } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
+import { headers } from "next/headers";
+import { isProduction } from "./../lib/environment";
+
 export const metadata: Metadata = {
 	metadataBase: new URL(siteConfig.url),
 	title: {
@@ -46,6 +49,10 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => {
+	const testdBSchemaHeaderName = "X-Test-DB-Schema";
+	if (!isProduction() && headers().has(testdBSchemaHeaderName))
+		console.log(headers().get(testdBSchemaHeaderName));
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={cn("min-h-screen font-sans", fonts)}>
