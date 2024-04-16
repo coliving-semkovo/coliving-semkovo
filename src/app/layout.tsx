@@ -11,8 +11,7 @@ import { siteConfig } from "@/lib/constant";
 import { fonts } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
-import { headers } from "next/headers";
-import { isProduction } from "./../lib/environment";
+import { uniqueDBSchemaPerTestIfTesting } from "./unique-db-schema-per-test";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteConfig.url),
@@ -49,9 +48,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => {
-	const testdBSchemaHeaderName = "X-Test-DB-Schema";
-	if (!isProduction() && headers().has(testdBSchemaHeaderName))
-		console.log(headers().get(testdBSchemaHeaderName));
+	uniqueDBSchemaPerTestIfTesting();
 
 	return (
 		<html lang="en" suppressHydrationWarning>
