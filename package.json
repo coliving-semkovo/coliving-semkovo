@@ -26,6 +26,9 @@
 	"lint-staged": {
 		"*.{jsx,js,ts,tsx}": ["eslint --cache --fix"]
 	},
+	"prisma": {
+		"seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.4",
 		"@next-auth/prisma-adapter": "^1.0.7",
@@ -75,6 +78,7 @@
 		"prisma": "^5.9.1",
 		"tailwindcss": "^3.3.0",
 		"tailwindcss-animate": "^1.0.7",
+		"ts-node": "^10.9.2",
 		"typescript": "^5"
 	}
 }
