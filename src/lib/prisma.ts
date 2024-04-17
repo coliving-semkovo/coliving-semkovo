@@ -21,7 +21,10 @@ export default function prisma(): PrismaClient {
 	const testdBSchemaHeaderName = "X-Test-DB-Schema";
 	if (!isProduction() && headers().has(testdBSchemaHeaderName)) {
 		console.log("Playwright mode");
-		return new PrismaClient();
+		const dbSchema = headers().get(testdBSchemaHeaderName);
+		return new PrismaClient({
+			datasourceUrl: `${process.env.DATABASE_URL}?schema=${dbSchema}`,
+		});
 	}
 	console.log("Not playwright mode");
 	return hotReloadSafePrismaSingleton;
