@@ -11,8 +11,6 @@ import { siteConfig } from "@/lib/constant";
 import { fonts } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
-import { uniqueDBSchemaPerTestIfTesting } from "./unique-db-schema-per-test";
-
 export const metadata: Metadata = {
 	metadataBase: new URL(siteConfig.url),
 	title: {
@@ -48,8 +46,6 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => {
-	uniqueDBSchemaPerTestIfTesting();
-
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={cn("min-h-screen font-sans", fonts)}>
