@@ -1,7 +1,7 @@
 import prisma from "../../lib/prisma";
 
 export default async function Users() {
-	const users = await prisma.user.findMany();
+	const users = await prisma().user.findMany();
 
 	return (
 		<main>
