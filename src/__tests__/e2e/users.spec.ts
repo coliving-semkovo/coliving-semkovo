@@ -1,12 +1,25 @@
 import { expect, test } from "@playwright/test";
-import prisma from "./lib/prisma";
+import type { PrismaClient } from "@prisma/client";
+import prismaClient from "./lib/prisma";
+
+let prisma: PrismaClient;
+let dbSchema: string;
 
 test.beforeEach(async ({ page }, testInfo) => {
+	dbSchema = testInfo.testId;
+	prisma = prismaClient(dbSchema);
 	await page.route("**/*", async (route) => {
 		const headers = route.request().headers();
-		headers["X-Test-DB-Schema"] = testInfo.testId;
+		headers["X-Test-DB-Schema"] = dbSchema;
 		await route.continue({ headers });
 	});
+});
+
+test.afterEach(async () => {
+	await prisma.$executeRawUnsafe(
+		`DROP SCHEMA IF EXISTS "${dbSchema}" CASCADE;`,
+	);
+	await prisma.$disconnect();
 });
 
 test("has just Jim and Jane", async ({ page }) => {
