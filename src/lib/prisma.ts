@@ -19,15 +19,15 @@ const hotReloadSafePrismaSingleton =
 
 export default function prisma(): PrismaClient {
 	const testdBSchemaHeaderName = "X-Test-DB-Schema";
-	if (!isProduction() && headers().has(testdBSchemaHeaderName)) {
-		console.log("Playwright mode");
-		const dbSchema = headers().get(testdBSchemaHeaderName);
-		return new PrismaClient({
-			datasourceUrl: `${process.env.DATABASE_URL}?schema=${dbSchema}`,
-		});
+	if (isProduction() || !headers().has(testdBSchemaHeaderName)) {
+		console.log("Not playwright mode");
+		return hotReloadSafePrismaSingleton;
 	}
-	console.log("Not playwright mode");
-	return hotReloadSafePrismaSingleton;
+	console.log("Playwright mode");
+	const dbSchema = headers().get(testdBSchemaHeaderName);
+	return new PrismaClient({
+		datasourceUrl: `${process.env.DATABASE_URL}?schema=${dbSchema}`,
+	});
 }
 
 /* The example in the Prisma docs uses `globalThis` whenever `NODE_ENV` is not "production",
