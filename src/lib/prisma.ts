@@ -24,9 +24,15 @@ export default function prisma(): PrismaClient {
 		return hotReloadSafePrismaSingleton;
 	}
 	console.log("Playwright mode");
-	const dbSchema = headers().get(testdBSchemaHeaderName);
+	if (!process.env.DATABASE_URL) {
+		throw new Error("please provide a database url");
+	}
+	const dbSchema = headers().get(testdBSchemaHeaderName) ?? "public";
+	const dbURL = new URL(process.env.DATABASE_URL);
+	dbURL.searchParams.set("schema", dbSchema);
+	console.log(`database url with schema: ${dbURL}`);
 	return new PrismaClient({
-		datasourceUrl: `${process.env.DATABASE_URL}?schema=${dbSchema}`,
+		datasourceUrl: dbURL.toString(),
 	});
 }
 
