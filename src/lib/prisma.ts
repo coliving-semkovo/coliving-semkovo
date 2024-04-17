@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { PrismaClient } from "@prisma/client";
 import { isProduction } from "./environment";
 
@@ -13,10 +14,17 @@ declare global {
 }
 /* eslint-enable no-var */
 
-const prismaSingleton = globalThis.prismaGlobal ?? prismaClientSingleton();
+const hotReloadSafePrismaSingleton =
+	globalThis.prismaGlobal ?? prismaClientSingleton();
 
 export default function prisma(): PrismaClient {
-	return prismaSingleton;
+	const testdBSchemaHeaderName = "X-Test-DB-Schema";
+	if (!isProduction() && headers().has(testdBSchemaHeaderName)) {
+		console.log("Playwright mode");
+		return new PrismaClient();
+	}
+	console.log("Not playwright mode");
+	return hotReloadSafePrismaSingleton;
 }
 
 /* The example in the Prisma docs uses `globalThis` whenever `NODE_ENV` is not "production",
@@ -25,4 +33,4 @@ export default function prisma(): PrismaClient {
    (including Vercel preview environments), so we can inject a new Prisma client with a
    unique DB schema when running Playwright tests.
  */
-if (!isProduction()) globalThis.prismaGlobal = prismaSingleton;
+if (!isProduction()) globalThis.prismaGlobal = hotReloadSafePrismaSingleton;
