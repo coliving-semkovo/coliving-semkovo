@@ -1,12 +1,14 @@
 import { expect, test } from "@playwright/test";
 import type { PrismaClient } from "@prisma/client";
-import prismaClient from "./lib/prisma";
+import prismaClient, { dbURL } from "./lib/prisma";
+import { prismaDBPush } from "./lib/prisma-db-push";
 
 let prisma: PrismaClient;
 let dbSchema: string;
 
 test.beforeEach(async ({ page }, testInfo) => {
 	dbSchema = testInfo.testId;
+	await prismaDBPush(dbURL(dbSchema).toString());
 	prisma = prismaClient(dbSchema);
 	await page.route("**/*", async (route) => {
 		const headers = route.request().headers();
