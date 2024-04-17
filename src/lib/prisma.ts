@@ -30,7 +30,6 @@ export default function prisma(): PrismaClient {
 	const dbSchema = headers().get(testdBSchemaHeaderName) ?? "public";
 	const dbURL = new URL(process.env.DATABASE_URL);
 	dbURL.searchParams.set("schema", dbSchema);
-	console.log(`database url with schema: ${dbURL}`);
 	return new PrismaClient({
 		datasourceUrl: dbURL.toString(),
 	});
