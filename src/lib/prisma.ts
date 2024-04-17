@@ -13,9 +13,11 @@ declare global {
 }
 /* eslint-enable no-var */
 
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
+const prismaSingleton = globalThis.prismaGlobal ?? prismaClientSingleton();
 
-export default prisma;
+export default function prisma(): PrismaClient {
+	return prismaSingleton;
+}
 
 /* The example in the Prisma docs uses `globalThis` whenever `NODE_ENV` is not "production",
    but that is too restrictive for us, as for instance the Vercel preview environments
@@ -23,4 +25,4 @@ export default prisma;
    (including Vercel preview environments), so we can inject a new Prisma client with a
    unique DB schema when running Playwright tests.
  */
-if (!isProduction()) globalThis.prismaGlobal = prisma;
+if (!isProduction()) globalThis.prismaGlobal = prismaSingleton;
