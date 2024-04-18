@@ -1,55 +1,45 @@
+import type { PrismaClient } from "@prisma/client";
 import { test, expect } from "./fixtures/prisma.fixture";
+import type { Page } from "@playwright/test";
+
+function toEmail(name: string): string {
+	return `${name.toLowerCase()}@prisma.io`;
+}
+
+async function addUser(name: string, prisma: PrismaClient): Promise<void> {
+	await prisma.user.upsert({
+		where: { email: toEmail(name) },
+		update: {},
+		create: {
+			email: toEmail(name),
+			name: name,
+		},
+	});
+}
+
+async function expectNumberOfUsersToBe(number: number, page: Page) {
+	const usersList = page.getByRole("listitem");
+	await expect(usersList).toHaveCount(number);
+}
 
 test("has just Jim and Jane", async ({ prisma, page }) => {
-	await prisma.user.upsert({
-		where: { email: "jim@prisma.io" },
-		update: {},
-		create: {
-			email: "jim@prisma.io",
-			name: "Jim",
-		},
-	});
-	await prisma.user.upsert({
-		where: { email: "jane@prisma.io" },
-		update: {},
-		create: {
-			email: "jane@prisma.io",
-			name: "Jane",
-		},
-	});
+	await addUser("Jim", prisma);
+	await addUser("Jane", prisma);
 
 	await page.goto("/users");
 
 	await expect(page.getByText("Jim")).toBeVisible();
 	await expect(page.getByText("Jane")).toBeVisible();
 
-	const usersList = page.getByRole("listitem");
-	await expect(usersList).toHaveCount(2);
+	await expectNumberOfUsersToBe(2, page);
 });
 
-test("has just Alice and Bob", async ({ prisma, page }) => {
-	await prisma.user.upsert({
-		where: { email: "alice@prisma.io" },
-		update: {},
-		create: {
-			email: "alice@prisma.io",
-			name: "Alice",
-		},
-	});
-	await prisma.user.upsert({
-		where: { email: "bob@prisma.io" },
-		update: {},
-		create: {
-			email: "bob@prisma.io",
-			name: "Bob",
-		},
-	});
+test("has just Alice", async ({ prisma, page }) => {
+	await addUser("Alice", prisma);
 
 	await page.goto("/users");
 
 	await expect(page.getByText("Alice")).toBeVisible();
-	await expect(page.getByText("Bob")).toBeVisible();
 
-	const usersList = page.getByRole("listitem");
-	await expect(usersList).toHaveCount(2);
+	await expectNumberOfUsersToBe(1, page);
 });
