@@ -1,30 +1,6 @@
-import { expect, test } from "@playwright/test";
-import type { PrismaClient } from "@prisma/client";
-import prismaClient, { dbURL } from "./lib/prisma";
-import { prismaDBPush } from "./lib/prisma-db-push";
+import { test, expect } from "./fixtures/prisma.fixture";
 
-let prisma: PrismaClient;
-let dbSchema: string;
-
-test.beforeEach(async ({ page }, testInfo) => {
-	dbSchema = testInfo.testId;
-	await prismaDBPush(dbURL(dbSchema).toString());
-	prisma = prismaClient(dbSchema);
-	await page.route("**/*", async (route) => {
-		const headers = route.request().headers();
-		headers["X-Test-DB-Schema"] = dbSchema;
-		await route.continue({ headers });
-	});
-});
-
-test.afterEach(async () => {
-	await prisma.$executeRawUnsafe(
-		`DROP SCHEMA IF EXISTS "${dbSchema}" CASCADE;`,
-	);
-	await prisma.$disconnect();
-});
-
-test("has just Jim and Jane", async ({ page }) => {
+test("has just Jim and Jane", async ({ prisma, page }) => {
 	await prisma.user.upsert({
 		where: { email: "jim@prisma.io" },
 		update: {},
@@ -51,7 +27,7 @@ test("has just Jim and Jane", async ({ page }) => {
 	await expect(usersList).toHaveCount(2);
 });
 
-test("has just Alice and Bob", async ({ page }) => {
+test("has just Alice and Bob", async ({ prisma, page }) => {
 	await prisma.user.upsert({
 		where: { email: "alice@prisma.io" },
 		update: {},
