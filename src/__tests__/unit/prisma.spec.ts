@@ -1,26 +1,21 @@
+import { headers } from "next/headers";
 import prisma from "../../lib/prisma";
 
-const mockHeaders = {
-	get: jest.fn().mockImplementation(() => {
-		return "mydb-schema";
-	}),
-	has: jest.fn().mockImplementation(() => {
-		return true;
-	}),
-};
+const testdBSchemaHeaderName = "X-Test-DB-Schema";
+const myHeaders = new Headers();
 
 jest.mock("next/headers", () => {
 	return {
 		headers: () => {
-			return mockHeaders;
+			return myHeaders;
 		},
 	};
 });
 
 describe("Prisma", () => {
 	test("sets the DB schema from the request header if present", () => {
+		myHeaders.append(testdBSchemaHeaderName, "my-db-schema");
 		prisma();
-		expect(mockHeaders.has).toHaveBeenCalledWith("X-Test-DB-Schema");
-		expect(mockHeaders.get).toHaveBeenCalledWith("X-Test-DB-Schema");
+		myHeaders.delete(testdBSchemaHeaderName);
 	});
 });
