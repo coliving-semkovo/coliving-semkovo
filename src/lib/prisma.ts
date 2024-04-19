@@ -14,12 +14,15 @@ declare global {
 }
 /* eslint-enable no-var */
 
-const hotReloadSafePrismaSingleton =
-	globalThis.prismaGlobal ?? prismaClientSingleton();
+// see https://www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dev-practices
+const prismaSingleton = globalThis.prismaGlobal ?? prismaClientSingleton();
 
-function dbURL(dbSchema: string): URL {
+function dbURL(dbSchema: string | null): URL {
 	if (!process.env.DATABASE_URL) {
 		throw new Error("please provide a database url");
+	}
+	if (!dbSchema) {
+		throw new Error("null dbSchema should be an unreachable scenario");
 	}
 	const dbURL = new URL(process.env.DATABASE_URL);
 	dbURL.searchParams.set("schema", dbSchema);
@@ -29,20 +32,11 @@ function dbURL(dbSchema: string): URL {
 export default function prisma(): PrismaClient {
 	const testdBSchemaHeaderName = "X-Test-DB-Schema";
 	if (isProduction() || !headers().has(testdBSchemaHeaderName)) {
-		console.log("Not playwright mode");
-		return hotReloadSafePrismaSingleton;
+		return prismaSingleton;
 	}
-	console.log("Playwright mode");
-	const dbSchema = headers().get(testdBSchemaHeaderName) ?? "public";
-	return new PrismaClient({
-		datasourceUrl: dbURL(dbSchema).toString(),
-	});
+	const dbSchema = headers().get(testdBSchemaHeaderName);
+	return new PrismaClient({ datasourceUrl: dbURL(dbSchema).toString() });
 }
 
-/* The example in the Prisma docs uses `globalThis` whenever `NODE_ENV` is not "production",
-   but that is too restrictive for us, as for instance the Vercel preview environments
-   would be deemed production. We need Prisma on the `globalThis` object for all environments
-   (including Vercel preview environments), so we can inject a new Prisma client with a
-   unique DB schema when running Playwright tests.
- */
-if (!isProduction()) globalThis.prismaGlobal = hotReloadSafePrismaSingleton;
+if (process.env.NODE_ENV === "development")
+	globalThis.prismaGlobal = prismaSingleton;
