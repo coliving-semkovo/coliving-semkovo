@@ -15,7 +15,11 @@ export const Navbar = () => {
 						<UserButton afterSignOutUrl="/" />
 					</SignedIn>
 					<SignedOut>
-						<SignInButton mode="modal">
+						<SignInButton
+							mode="modal"
+							fallbackRedirectUrl="/manage"
+							signUpFallbackRedirectUrl="/manage"
+						>
 							<Button>Manage Your Stay</Button>
 						</SignInButton>
 					</SignedOut>
