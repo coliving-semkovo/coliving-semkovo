@@ -1,12 +1,9 @@
 import Link from "next/link";
 
-import { SignInButton } from "@/components/navbar/sign-in-button";
-import { UserDropdown } from "@/components/navbar/user-dropdown";
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
-	// Assuming a fixed state for demonstration
-	const isAuthenticated = false; // Example authentication state, adjust based on actual logic later
-
 	return (
 		<header className="w-full border-b">
 			<div className="container flex h-16 items-center justify-between">
@@ -14,7 +11,14 @@ export const Navbar = () => {
 					Coliving Semkovo
 				</Link>
 				<div className="flex items-center gap-2">
-					{isAuthenticated ? <UserDropdown /> : <SignInButton />}
+					<SignedIn>
+						<UserButton afterSignOutUrl="/" />
+					</SignedIn>
+					<SignedOut>
+						<SignInButton mode="modal">
+							<Button>Manage Your Stay</Button>
+						</SignInButton>
+					</SignedOut>
 				</div>
 			</div>
 		</header>
