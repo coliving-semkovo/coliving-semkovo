@@ -10,6 +10,7 @@ Some of the benefits of using Codespaces for the IDE include:
 - ensures that everyone contributing to the code has exactly the same local development configured
 - ensures that the local development environment is documented via configuration as code
 - allows anyone contributing to the code for the first time to get up and running quickly and easily
+- ensures environment variables are securely shared across Codespaces sessions (configured on https://github.com/coliving-semkovo/coliving-semkovo/settings/secrets/codespaces), without having to store them locally.
 
 ### Codespace requirements
 
