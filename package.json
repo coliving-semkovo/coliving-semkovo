@@ -24,9 +24,7 @@
 		"hooks": {}
 	},
 	"lint-staged": {
-		"*.{jsx,js,ts,tsx}": [
-			"eslint --cache --fix"
-		]
+		"*.{jsx,js,ts,tsx}": ["eslint --cache --fix"]
 	},
 	"dependencies": {
 		"@clerk/nextjs": "^5.0.6",
