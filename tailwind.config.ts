@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config = {
 	darkMode: ["class"],
@@ -10,10 +11,6 @@ const config = {
 	],
 	prefix: "",
 	theme: {
-		fontFamily: {
-			sans: ["var(--font-sans)"],
-			mono: ["var(--font-mono)"],
-		},
 		container: {
 			center: true,
 			padding: "2rem",
@@ -75,6 +72,9 @@ const config = {
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+			},
+			fontFamily: {
+				sans: ["var(--font-sans)", ...fontFamily.sans],
 			},
 		},
 	},

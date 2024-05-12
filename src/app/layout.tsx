@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { DM_Sans as FontSans } from "next/font/google";
 
 import type { PropsWithChildren } from "react";
 import type { Metadata } from "next";
@@ -8,10 +9,13 @@ import { Navbar } from "@/components/navbar/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/lib/constant";
-import { fonts } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
-
 import { ClerkProvider } from "@clerk/nextjs";
+
+const fontSans = FontSans({
+	subsets: ["latin"],
+	variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteConfig.url),
@@ -50,7 +54,12 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={cn("min-h-screen font-sans", fonts)}>
+			<body
+				className={cn(
+					"min-h-screen bg-background font-sans antialiased",
+					fontSans.variable,
+				)}
+			>
 				<ClerkProvider>
 					<ThemeProvider attribute="class">
 						<Navbar />
