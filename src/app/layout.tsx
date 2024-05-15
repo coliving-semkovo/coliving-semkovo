@@ -11,6 +11,8 @@ import { siteConfig } from "@/lib/constant";
 import { fonts } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 export const metadata: Metadata = {
 	metadataBase: new URL(siteConfig.url),
 	title: {
@@ -49,12 +51,14 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={cn("min-h-screen font-sans", fonts)}>
-				<ThemeProvider attribute="class">
-					<Navbar />
-					{children}
-					<Footer />
-					<Toaster />
-				</ThemeProvider>
+				<ClerkProvider>
+					<ThemeProvider attribute="class">
+						<Navbar />
+						{children}
+						<Footer />
+						<Toaster />
+					</ThemeProvider>
+				</ClerkProvider>
 			</body>
 		</html>
 	);

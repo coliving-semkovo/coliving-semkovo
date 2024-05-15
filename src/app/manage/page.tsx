@@ -1,10 +1,27 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import WireframeSection from "@/components/wireframe/wireframe-section";
 
 const HubPage = () => {
+	const { user } = useUser();
+	const [title, setTitle] = useState("Your Hub");
+
+	useEffect(() => {
+		// Updates the title when the user data is available and valid.
+		if (user) {
+			const displayName = user.firstName
+				? `${user.firstName}${user.firstName.endsWith("s") ? "'" : "'s"} Hub`
+				: "Your Hub";
+			setTitle(displayName);
+		}
+	}, [user]);
+
 	return (
 		<main>
 			<WireframeSection
-				title="Your Hub"
+				title={title}
 				explanation="This is where you can manage and organize everything you need to. You need to be logged in to do that."
 				subsections={[
 					{
@@ -35,7 +52,6 @@ const HubPage = () => {
 						title: "Manage Apartments",
 						explanation:
 							"If you're an owner, this is where you see the apartments you own and manage.",
-
 						subsections: [
 							{
 								title: "A777",
