@@ -37,6 +37,61 @@ All you need to do is click on the green `<> Code` dropdown button on the
 [GitHub repo page](https://github.com/tobyurff/coliving-semkovo),
 and then choose: `Create codespace on main`.
 
+### Option 2: Dev Containers (Local Development)
+
+If you prefer local development, you can use Dev Containers with VS Code or Cursor IDE.
+
+#### Prerequisites
+
+- **Docker Desktop**: Install and ensure it's running
+- **VS Code** or **Cursor IDE** with the Dev Containers extension
+
+#### Opening in Dev Container
+
+1. Clone the repository locally
+2. Open the project folder in VS Code or Cursor IDE
+3. When prompted "Folder contains a Dev Container configuration file", click **"Reopen in Container"**
+   
+   Alternatively:
+   - Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+   - Type and select **"Dev Containers: Reopen in Container"**
+
+4. Wait for the container to build and initialize (first time setup takes a few minutes)
+
+#### What Happens During Dev Container Setup
+
+When the dev container starts for the first time, it automatically:
+
+1. **Builds the Docker environment** with Node.js 20 (Bookworm) and PostgreSQL
+2. **Installs all npm dependencies** (`npm install`)
+3. **Sets up the PostgreSQL database** and runs Prisma migrations (`npx prisma migrate reset -f`)
+4. **Installs Playwright** for E2E testing including browser dependencies
+5. **Configures your IDE** with recommended extensions:
+   - GitHub Actions support
+   - Playwright test runner
+   - Biome formatter/linter
+   - PostgreSQL client
+   - Prisma ORM support
+
+#### Database Configuration
+
+PostgreSQL is automatically configured and running within the container:
+- **Host**: `localhost` (within container) or `db` (service name)
+- **Port**: `5432`
+- **Database**: `postgres`
+- **Username**: `postgres`
+- **Password**: `postgres`
+
+### Starting the Development Server
+
+Once your environment is running (either Codespaces or Dev Container):
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:3000`
+
 
 ## Playwright (browser tests)
 
