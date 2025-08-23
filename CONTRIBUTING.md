@@ -2,17 +2,28 @@
 
 ## Setting up your development environment
 
-The recommended way to setup your development environment for this repo is to open it in a
-[GitHub Codespace](https://github.com/features/codespaces).
+You have two recommended options for setting up your development environment:
 
-Some of the benefits of using Codespaces for the IDE include:
+1. **GitHub Codespaces** (cloud-based, no local setup required)
+2. **Dev Containers** (local development with Docker)
 
-- ensures that everyone contributing to the code has exactly the same local development configured
-- ensures that the local development environment is documented via configuration as code
-- allows anyone contributing to the code for the first time to get up and running quickly and easily
-- ensures environment variables are securely shared across Codespaces sessions (configured on https://github.com/coliving-semkovo/coliving-semkovo/settings/secrets/codespaces), without having to store them locally.
+Both options provide:
+- Exactly the same development environment for all contributors
+- Pre-configured tools and dependencies
+- Automatic database setup
+- Development environment documented as code
 
-### Codespace requirements
+### Option 1: GitHub Codespaces (Cloud Development)
+
+The easiest way to get started is using [GitHub Codespaces](https://github.com/features/codespaces).
+
+Benefits of using Codespaces:
+- No local setup required
+- Ensures that everyone contributing has exactly the same development environment
+- Allows anyone to get up and running quickly and easily
+- Environment variables are securely shared across Codespaces sessions (configured on https://github.com/coliving-semkovo/coliving-semkovo/settings/secrets/codespaces)
+
+#### Codespace requirements
 
 Literally all you need is either:
 - a web browser, or
