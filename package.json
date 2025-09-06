@@ -24,7 +24,8 @@
 		"hooks": {}
 	},
 	"lint-staged": {
-		"*.{jsx,js,ts,tsx}": ["eslint --cache --fix"]
+		"*.{jsx,js,ts,tsx}": ["biome check --apply-unsafe", "eslint --cache --fix"],
+		"*.{json,css,md}": ["biome format --write"]
 	},
 	"dependencies": {
 		"@clerk/nextjs": "^5.0.6",

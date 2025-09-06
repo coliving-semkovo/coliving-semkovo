@@ -11,5 +11,10 @@
 	},
 	"files": {
 		"ignore": [".devcontainer/**/*.json", "package-lock.json"]
+	},
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"defaultBranch": "main"
 	}
 }
