@@ -65,8 +65,9 @@ When the dev container starts for the first time, it automatically:
 1. **Builds the Docker environment** with Node.js 20 (Bookworm) and PostgreSQL
 2. **Installs all npm dependencies** (`npm install`)
 3. **Sets up the PostgreSQL database** and runs Prisma migrations (`npx prisma migrate reset -f`)
-4. **Installs Playwright** for E2E testing including browser dependencies
-5. **Configures your IDE** with recommended extensions:
+4. **Installs Playwright browsers and system dependencies** for E2E testing (`sudo npx playwright install-deps && npx playwright install`)
+5. **Installs Claude Code CLI** for AI-assisted development (`npm install -g @anthropic-ai/claude-code`)
+6. **Configures your IDE** with recommended extensions:
    - GitHub Actions support
    - Playwright test runner
    - Biome formatter/linter
@@ -92,6 +93,16 @@ npm run dev
 
 The application will be available at `http://localhost:3000`
 
+### Using Claude Code for AI-Assisted Development
+
+Claude Code is automatically installed in the dev container and can help with:
+- Writing and debugging code
+- Understanding the codebase
+- Running tests and fixing issues
+- Refactoring and optimization
+
+To use Claude Code, simply run `claude` in the terminal. For more information, visit the [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code).
+
 
 ## Playwright (browser tests)
 
@@ -105,9 +116,10 @@ and [the extension's documentation](https://marketplace.visualstudio.com/items?i
 
 - `npx playwright test`
 
-or via our wrapper script:
+or via our wrapper scripts:
 
-- `npm run e2e`
+- `npm run e2e` - Full test run with detailed reporter
+- `npm run e2e:quick` - Quick test run with minimal output
 
 ### Running the Playwright tests in UI mode (in a Codespace)
 
@@ -133,9 +145,25 @@ It is extremely fast and by using one tool for both formatting and linting we av
 [conflicts](https://dev.to/studio_m_song/how-to-make-eslint-work-with-prettier-avoiding-conflicts-and-problems-57pi)
 that can often arise when using Prettier and ESLint.
 
-The Codespace comes with [Biome's VS Code extension](https://biomejs.dev/reference/vscode/)
-already installed and configured.  It is setup to
-[format on save](https://biomejs.dev/reference/vscode/#format-on-save).
+### Automatic Formatting
+
+The development environment is configured for aggressive automatic formatting:
+
+- **Format on Save**: Automatically formats when you save files
+- **Format on Paste**: Formats code immediately when pasting
+- **Format on Type**: Provides real-time formatting feedback
+- **Auto-fix on Save**: Automatically fixes lint issues that can be auto-corrected
+- **Pre-commit Hook**: Automatically formats staged files before commits
+
+### Manual Formatting Commands
+
+- `npm run format` - Format and auto-fix all files (recommended for Claude-written code)
+- `npm run format:write` - Format all files without linting
+- `npm run format:check` - Check formatting without making changes
+
+### For AI-Generated Code
+
+When using Claude Code or other AI tools, run `npm run format` after significant code changes to ensure everything adheres to our standards.
 
 We also have a Biome CI check (a 
 [Biome GitHub Action](https://biomejs.dev/recipes/continuous-integration/#github-actions)) that runs on all pushes and pull requests, to ensure that we are always fully compliant with Biome.

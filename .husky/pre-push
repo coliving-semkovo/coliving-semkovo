@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Running E2E tests before push..."
+
+# Run E2E tests
+npm run e2e
+
+# If tests fail, the push will be aborted
+if [ $? -ne 0 ]; then
+  echo "❌ E2E tests failed! Push aborted."
+  echo "Run 'npm run e2e:ui' to debug failing tests."
+  exit 1
+fi
+
+echo "✅ E2E tests passed!"
