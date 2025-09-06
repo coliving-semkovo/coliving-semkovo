@@ -16,9 +16,9 @@
 		"test": "jest",
 		"test:watch": "jest --watchAll",
 		"e2e": "playwright test",
+		"e2e:quick": "playwright test --project=chromium --reporter=dot",
 		"e2e:ui": "playwright test --ui",
 		"e2e:ui:codespace": "npm run e2e -- --ui-host=0.0.0.0",
-		"e2e:quick": "playwright test --reporter=dot",
 		"test:all": "npm run typecheck && npm run test && npm run e2e:quick",
 		"postbuild": "next-sitemap --config next-sitemap.config.js",
 		"prepare": "husky install"

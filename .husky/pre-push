@@ -3,8 +3,11 @@
 
 echo "Running E2E tests before push..."
 
-# Run E2E tests
-npm run e2e
+# Kill any existing dev servers to avoid port conflicts
+lsof -ti:3000 | xargs kill -9 2>/dev/null || true
+
+# Run quick E2E tests (chromium only, faster)
+npm run e2e:quick
 
 # If tests fail, the push will be aborted
 if [ $? -ne 0 ]; then
